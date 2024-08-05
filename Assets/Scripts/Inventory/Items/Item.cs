@@ -2,7 +2,7 @@
 
 namespace Inventory.Items
 {
-    [RequireComponent(typeof(PolygonCollider2D))]
+    [RequireComponent(typeof(Collider))]
     public class Item : MonoBehaviour
     {
         [field: SerializeField] public ItemData Data { get; private set; }

@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Inventory.Interaction
 {
-    [RequireComponent(typeof(CircleCollider2D))]
+    [RequireComponent(typeof(Collider))]
     public class ItemHandler : MonoBehaviour
     {
         [SerializeField] private string _ownerId;
@@ -26,8 +26,8 @@ namespace Inventory.Interaction
         //     Initialize();
         // }
 
-        private void OnTriggerEnter2D(Collider2D other) => AddSelectedItem(other.GetComponent<Item>());
-        private void OnTriggerExit2D(Collider2D other) => RemoveSelectedItem(other.GetComponent<Item>());
+        private void OnTriggerEnter(Collider other) => AddSelectedItem(other.GetComponent<Item>());
+        private void OnTriggerExit(Collider other) => RemoveSelectedItem(other.GetComponent<Item>());
 
         public void Initialize(InventoryServiceProvider inventoryServiceProvider)
         {
@@ -40,8 +40,8 @@ namespace Inventory.Interaction
             var inventoryData = new InventoryGridData
             {
                 ownerId = _ownerId,
-                slots = new List<InventorySlotData>(),
-                size = GlobalConstants.InventorySize
+                size = GlobalConstants.InventorySize,
+                slots = GetSlotData(GlobalConstants.InventorySize)/////////////////////////////////////
             };
 
             _inventoryServiceProvider = inventoryServiceProvider;
@@ -51,6 +51,23 @@ namespace Inventory.Interaction
             print($"{_ownerId} ItemHandler initialized");
         }
 
+        private List<InventorySlotData> GetSlotData(Vector2Int size) /////////////// временно
+        {
+            var slotData = new List<InventorySlotData>();
+            var length = size.x * size.y;
+            
+            for (int i = 0; i < length; i++)
+            {
+                slotData.Add(new InventorySlotData()
+                {
+                    itemId = "",
+                    amount = 0
+                });
+            }
+
+            return slotData;
+        }
+        
         private void AddItemToInventory()
         {
             if (_selectedItems.Count > 0)
