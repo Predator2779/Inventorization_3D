@@ -14,7 +14,8 @@ namespace Character.Input
             _playerCamera = camera;
             _movable = movable;
 
-            Observable.EveryUpdate()
+            Observable
+                .EveryUpdate()
                 .Where(_ => IsMoving())
                 .Subscribe(_ => _movable.MoveTo(GetMousePosition()));
         }

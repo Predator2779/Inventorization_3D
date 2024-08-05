@@ -31,8 +31,7 @@ namespace Inventory.Interaction
 
         public void Initialize(InventoryServiceProvider inventoryServiceProvider)
         {
-            // _inventoryInput = new InventoryInput();
-            _inventoryInput = gameObject.AddComponent<InventoryInput>();
+            _inventoryInput = new InventoryInput();
             _inventoryInput.OnItemInteract += AddItemToInventory;
             _inventoryInput.OnInventoryChecked += CheckInventory;
 
@@ -48,7 +47,7 @@ namespace Inventory.Interaction
             _inventoryServiceProvider.InitializeInventory(inventoryData);
             _inventoryServiceProvider.PrintInventoryContents(_ownerId);
 
-            print($"{_ownerId} ItemHandler initialized");
+            print($"{_ownerId} inventory initialized");
         }
 
         private List<InventorySlotData> GetSlotData(Vector2Int size) /////////////// временно

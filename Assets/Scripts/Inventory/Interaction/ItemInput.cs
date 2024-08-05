@@ -1,17 +1,25 @@
 ﻿using System;
+using UniRx;
 using UnityEngine;
 
 namespace Inventory.Interaction
 {
-    public class InventoryInput : MonoBehaviour // to ITickable
+    public class InventoryInput
     {
-        public event Action OnItemInteract; // UniRx?
+        public event Action OnItemInteract;
         public event Action OnInventoryChecked;
 
-        private void Update()
+        public InventoryInput()
         {
-            if (Input.GetKeyDown(KeyCode.E)) OnItemInteract?.Invoke();
-            if (Input.GetKeyDown(KeyCode.Tab)) OnInventoryChecked?.Invoke();
+            Observable
+                .EveryUpdate()
+                .Where(_ => Input.GetKeyDown(KeyCode.E))
+                .Subscribe(_ => OnItemInteract?.Invoke());
+
+            Observable
+                .EveryUpdate()
+                .Where(_ => Input.GetKeyDown(KeyCode.Tab))
+                .Subscribe(_ => OnInventoryChecked?.Invoke());
         }
     }
 }
