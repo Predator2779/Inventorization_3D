@@ -13,16 +13,24 @@ namespace Inventory.GameStates
 
         public async UniTask SaveGameState()
         {
-            var json = JsonUtility.ToJson(GameState);
-            PlayerPrefs.SetString(KEY, json);
+            await UniTask.WaitUntil(() =>
+            {
+                var json = JsonUtility.ToJson(GameState);
+                PlayerPrefs.SetString(KEY, json);
+                return true;
+            });
         }
 
         public async UniTask LoadGameState()
         {
             if (PlayerPrefs.HasKey(KEY))
             {
-                var json = PlayerPrefs.GetString(KEY);
-                GameState = JsonUtility.FromJson<GameStateData>(json);
+                await UniTask.WaitUntil(() =>
+                {
+                    var json = PlayerPrefs.GetString(KEY);
+                    GameState = JsonUtility.FromJson<GameStateData>(json);
+                    return true;
+                });
             }
             else
             {
