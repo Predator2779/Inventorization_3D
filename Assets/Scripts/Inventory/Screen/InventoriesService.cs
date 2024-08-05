@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Inventory.GameStates;
 using Inventory.Grid;
 using Inventory.ResultStructs;
 using UnityEngine;
