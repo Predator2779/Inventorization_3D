@@ -75,7 +75,7 @@ namespace Inventory.Interaction
 
                  foreach (var slot in data.slots)
                  {
-                     message += slot.itemId + "\n";
+                     message += $"{slot.itemId} x{slot.amount}\n";
                  }
 
                  print(message);

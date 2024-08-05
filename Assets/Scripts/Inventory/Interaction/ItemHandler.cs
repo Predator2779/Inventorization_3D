@@ -58,11 +58,7 @@ namespace Inventory.Interaction
             
             for (int i = 0; i < length; i++)
             {
-                slotData.Add(new InventorySlotData()
-                {
-                    itemId = "",
-                    amount = 0
-                });
+                slotData.Add(new InventorySlotData());
             }
 
             return slotData;
