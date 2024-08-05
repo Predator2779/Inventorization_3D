@@ -2,7 +2,7 @@
 using Inventory.Slot;
 using UnityEngine;
 
-namespace Inventory.InventoryGrid
+namespace Inventory.Grid
 {
     public interface IReadOnlyInventoryGrid : IReadOnlyInventory
     {

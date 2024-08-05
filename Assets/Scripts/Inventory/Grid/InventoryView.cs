@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Inventory.InventoryGrid
+namespace Inventory.Grid
 {
     public class InventoryView : MonoBehaviour, IInventoryView
     {

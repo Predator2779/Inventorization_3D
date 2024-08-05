@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Inventory.InventoryGrid
+namespace Inventory.Grid
 {
     public interface IReadOnlyInventory
     {

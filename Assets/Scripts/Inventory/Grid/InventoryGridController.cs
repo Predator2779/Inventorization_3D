@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Inventory.Slot;
 
-namespace Inventory.InventoryGrid
+namespace Inventory.Grid
 {
     public class InventoryGridController
     {

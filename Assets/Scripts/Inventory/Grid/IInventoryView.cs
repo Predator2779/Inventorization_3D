@@ -1,6 +1,6 @@
 ﻿using Inventory.Slot;
 
-namespace Inventory.InventoryGrid
+namespace Inventory.Grid
 {
     public interface IInventoryView
     {
