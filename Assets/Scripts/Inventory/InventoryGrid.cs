@@ -77,7 +77,7 @@ namespace Inventory
             else
             {
                 itemsAddedAmount = amount;
-                slot.Amount = newValue; // исправить на slot.Amount += newValue;
+                slot.Amount += newValue; // было slot.Amount = newValue;
             }
 
             return new AddItemToInventoryGridResult(OwnerId, amount, itemsAddedAmount);
