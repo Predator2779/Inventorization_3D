@@ -18,14 +18,6 @@ namespace Inventory.Interaction
         private List<Item> _selectedItems = new List<Item>();
         private bool _isInventoryOpened;
 
-        // [Inject]
-        // private void Construct(InventoryServiceProvider provider, InventoryInput input)
-        // {
-        //     _inventoryServiceProvider = provider;
-        //     _inventoryInput = input;
-        //     Initialize();
-        // }
-
         private void OnTriggerEnter(Collider other) => AddSelectedItem(other.GetComponent<Item>());
         private void OnTriggerExit(Collider other) => RemoveSelectedItem(other.GetComponent<Item>());
 
@@ -34,13 +26,12 @@ namespace Inventory.Interaction
             _inventoryInput = new InventoryInput();
             _inventoryInput.OnItemInteract += AddItemToInventory;
             _inventoryInput.OnInventoryChecked += CheckInventory;
-
-            // зарегистрировать инвентарь
+            
             var inventoryData = new InventoryGridData
             {
                 ownerId = _ownerId,
                 size = GlobalConstants.InventorySize,
-                slots = GetSlotData(GlobalConstants.InventorySize)/////////////////////////////////////
+                slots = InitializeSlots(GlobalConstants.InventorySize)
             };
 
             _inventoryServiceProvider = inventoryServiceProvider;
@@ -50,15 +41,13 @@ namespace Inventory.Interaction
             print($"{_ownerId} inventory initialized");
         }
 
-        private List<InventorySlotData> GetSlotData(Vector2Int size) /////////////// временно
+        private List<InventorySlotData> InitializeSlots(Vector2Int size)
         {
             var slotData = new List<InventorySlotData>();
             var length = size.x * size.y;
             
             for (int i = 0; i < length; i++)
-            {
                 slotData.Add(new InventorySlotData());
-            }
 
             return slotData;
         }
@@ -72,7 +61,7 @@ namespace Inventory.Interaction
                 if (result.ItemsToAddAmount == result.ItemsAddedAmount)
                 {
                     RemoveSelectedItem(item);
-                    //  и после вернуть обратно в пул
+                    // и после вернуть обратно в пул
                 }
                 else
                 {

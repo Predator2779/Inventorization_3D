@@ -1,4 +1,6 @@
-﻿using Inventory.Interaction;
+﻿using Cysharp.Threading.Tasks;
+using Inventory.GameStates;
+using Inventory.Interaction;
 using Inventory.Screen;
 using UnityEngine;
 
@@ -8,19 +10,43 @@ namespace Inventory
     {
         [SerializeField] private InventoryServiceProvider _inventoryServiceProvider;
         [SerializeField] private ItemHandler[] _itemHandlers;
-        // [SerializeField] private ScreenView _screenView; 
+        [SerializeField] private ScreenView _screenView;
 
         private void Awake() => Initialize();
 
         private async void Initialize()
         {
-            await _inventoryServiceProvider.Initialize();
-            
+            var gameStateProvider = await InitializeGameStateProvider();
+            var inventoriesService = InitializeInventoryService(gameStateProvider);
+            await InitializeInventoryServiceProvider(inventoriesService, gameStateProvider);
+            InitializeItemHandlers();
+
+            if (!_inventoryServiceProvider.HasInventories())
+                _inventoryServiceProvider.PrintInventories();
+        }
+
+        private async UniTask<GameStatePlayerPrefsProvider> InitializeGameStateProvider()
+        {
+            var gameStateProvider = new GameStatePlayerPrefsProvider();
+            await gameStateProvider.LoadGameState();
+            return gameStateProvider;
+        }
+
+        private InventoriesService InitializeInventoryService(IGameStateSaver stateSaver)
+        {
+            return new InventoriesService(stateSaver);
+        }
+
+        private async UniTask InitializeInventoryServiceProvider(InventoriesService inventoriesService,
+            GameStatePlayerPrefsProvider gameStateProvider)
+        {
+            await _inventoryServiceProvider.Initialize(_screenView, inventoriesService, gameStateProvider);
+        }
+
+        private void InitializeItemHandlers()
+        {
             foreach (var itemHandler in _itemHandlers)
                 itemHandler.Initialize(_inventoryServiceProvider);
-    
-            if (!_inventoryServiceProvider.HasInventories()) 
-                _inventoryServiceProvider.PrintInventories();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using Inventory.Grid;
 using UnityEngine;
@@ -39,7 +40,13 @@ namespace Inventory.GameStates
             }
         }
 
-        public void AddInventory(InventoryGridData inventoryData) => GameState.inventories.Add(inventoryData);
+        public void AddInventory(InventoryGridData inventoryData)
+        {
+            if (GameState.inventories.All(inventory => inventory.ownerId != inventoryData.ownerId))
+                GameState.inventories.Add(inventoryData);
+            else
+                Debug.LogWarning("This inventory is already registered in GameStateData!");
+        }
 
         private void InitializeGameState()
         {
