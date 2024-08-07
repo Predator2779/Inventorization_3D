@@ -24,6 +24,12 @@ namespace Inventory.Slot
             set => _amount.text = value == 0 ? "" : value.ToString();
         }
 
+        // public void SetEnable(bool value)
+        // {
+        //     if (value) Enable();
+        //     else Disable();
+        // }
+
         private void OnEnable()
         {
             _title.DOFade(1, 1);
