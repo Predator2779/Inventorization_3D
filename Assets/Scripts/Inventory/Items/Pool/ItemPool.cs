@@ -27,7 +27,7 @@ namespace Inventory.Items
             if (!_items.Contains(item)) return;
 
             item.gameObject.SetActive(true);
-            item.transform.SetParent(parent);
+            item.transform.SetParent(parent == null ? _itemsParent : parent);
             _items.Remove(item);
         }
     }

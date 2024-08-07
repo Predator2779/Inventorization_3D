@@ -1,6 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using Inventory.GameStates;
 using Inventory.Interaction;
+using Inventory.Items;
 using Inventory.Screen;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ namespace Inventory
         [SerializeField] private InventoryServiceProvider _inventoryServiceProvider;
         [SerializeField] private ItemHandler[] _itemHandlers;
         [SerializeField] private ScreenView _screenView;
+        [SerializeField] private ItemPoolFiller _itemPoolFiller;
+        [SerializeField] private Transform _parentForItems;
 
         private void Awake() => Initialize();
 
@@ -18,7 +21,11 @@ namespace Inventory
         {
             var gameStateProvider = await InitializeGameStateProvider();
             var inventoriesService = InitializeInventoryService(gameStateProvider);
-            await InitializeInventoryServiceProvider(inventoriesService, gameStateProvider);
+            var itemPool = InitializeItemsPool(_parentForItems); // далее заполнить пул
+            
+            _itemPoolFiller.FillingPool(ref itemPool);
+            
+            await InitializeInventoryServiceProvider(inventoriesService, gameStateProvider, itemPool);
             InitializeItemHandlers();
 
             if (!_inventoryServiceProvider.HasInventories())
@@ -38,15 +45,20 @@ namespace Inventory
         }
 
         private async UniTask InitializeInventoryServiceProvider(InventoriesService inventoriesService,
-            GameStatePlayerPrefsProvider gameStateProvider)
+            GameStatePlayerPrefsProvider gameStateProvider, ItemPool<Item> itemPool)
         {
-            await _inventoryServiceProvider.Initialize(_screenView, inventoriesService, gameStateProvider);
+            await _inventoryServiceProvider.Initialize(_screenView, inventoriesService, gameStateProvider, itemPool);
         }
 
         private void InitializeItemHandlers()
         {
             foreach (var itemHandler in _itemHandlers)
                 itemHandler.Initialize(_inventoryServiceProvider);
+        }
+
+        private ItemPool<Item> InitializeItemsPool(Transform parentOfItems)
+        {
+            return new ItemPool<Item>(parentOfItems);
         }
     }
 }

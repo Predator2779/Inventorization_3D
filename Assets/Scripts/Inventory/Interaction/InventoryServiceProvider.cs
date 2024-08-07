@@ -21,19 +21,17 @@ namespace Inventory.Interaction
         private ItemPool<Item> _itemPool;
 
         public async UniTask Initialize(ScreenView screenView, InventoriesService inventoriesService,
-            GameStatePlayerPrefsProvider gameStateProvider)
+            GameStatePlayerPrefsProvider gameStateProvider, ItemPool<Item> itemPool)
         {
             _screenView = screenView;
             _inventoriesService = inventoriesService;
             _gameStateProvider = gameStateProvider;
+            _itemPool = itemPool;
 
             UpdateGameStateData();
             InitializeInventories();
 
             _screenController = new ScreenController(_inventoriesService, _screenView);
-            _itemPool = new ItemPool<Item>(_itemsParent);
-
-            // заполнить пул пока здесь, потом из спавнера и/или загрузчика сохранений
 
             print($"InventoryServiceProvider initialized");
         }
