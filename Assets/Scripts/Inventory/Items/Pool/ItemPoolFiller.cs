@@ -19,12 +19,17 @@ namespace Inventory.Items.Pool
         {
             foreach (var spawnedItem in _spawnedItems)
             {
-                for (int i = 0; i < spawnedItem.CountOfSpawn; i++)
+                for (int i = 0; i < spawnedItem.CountToPool; i++)
                 {
                     pool.Add(Instantiate(
                         spawnedItem.Item,
                         GetRandomPosition(),
                         Quaternion.identity));
+                }
+
+                for (int i = 0; i < spawnedItem.CountOfSpawn; i++)
+                {
+                    pool.Get(spawnedItem.Item.name);
                 }
             }
         }

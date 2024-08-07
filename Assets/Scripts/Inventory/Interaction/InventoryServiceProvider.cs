@@ -30,14 +30,14 @@ namespace Inventory.Interaction
             _itemPool = itemPool;
 
             UpdateGameStateData();
-            InitializeInventories();
+            await InitializeInventories();
 
             _screenController = new ScreenController(_inventoriesService, _screenView);
 
             print($"InventoryServiceProvider initialized");
         }
 
-        public void InitializeInventory(InventoryGridData inventoryData)
+        public async UniTask InitializeInventory(InventoryGridData inventoryData)
         {
             if (_inventoriesService.HasInventory(inventoryData.ownerId))
             {
@@ -87,22 +87,22 @@ namespace Inventory.Interaction
 
         public AddItemToInventoryGridResult AddItemsToInventory(string ownerId, Item item)
         {
-            return _inventoriesService.AddItemsToInventory(ownerId, item.Data.Name, item.Data.Count);
+            return _inventoriesService.AddItemsToInventory(ownerId, item.Data.Name, item.Data.Amount);
         }
 
         public RemoveItemFromInventoryGridResult RemoveItemsFromInventory(string ownerId, Item item)
         {
-            return _inventoriesService.RemoveItemsFromInventory(ownerId, item.Data.Name, item.Data.Count);
+            return _inventoriesService.RemoveItemsFromInventory(ownerId, item.Data.Name, item.Data.Amount);
         }
 
-        public void AddItemsToPool(Item item)
+        public void AddItemToPool(Item item)
         {
             _itemPool.Add(item);
         }
 
-        public void RemoveItemsFromPool(Item item)
+        public Item GetItemFromPool(string itemId)
         {
-            _itemPool.Remove(item);
+            return _itemPool.Get(itemId);
         }
 
         public void OpenInventory(string ownerId)
@@ -125,13 +125,13 @@ namespace Inventory.Interaction
             _gameStateData = _gameStateProvider.GameState;
         }
 
-        private void InitializeInventories()
+        private async UniTask InitializeInventories()
         {
             if (_gameStateData.inventories.Count > 0)
             {
                 foreach (var inventoryData in _gameStateData.inventories.ToList())
                 {
-                    InitializeInventory(inventoryData);
+                    await InitializeInventory(inventoryData);
                 }
             }
         }

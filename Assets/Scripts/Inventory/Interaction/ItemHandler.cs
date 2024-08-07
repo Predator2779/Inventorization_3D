@@ -61,12 +61,13 @@ namespace Inventory.Interaction
                 if (result.ItemsToAddAmount == result.ItemsAddedAmount)
                 {
                     RemoveSelectedItem(item);
-                    // и после вернуть обратно в пул
+                    _inventoryServiceProvider.AddItemToPool(item);
                 }
                 else
                 {
-                    // добавить в _selectedItems оставшиеся
-                    throw new Exception("Not all items have been added");
+                    item.Data.Amount = result.ItemsNotAddedAmount;
+                    _selectedItems.Add(item);
+                    print("Not all items have been added");
                 }
 
                 _inventoryServiceProvider.PrintInventoryContents(_ownerId);

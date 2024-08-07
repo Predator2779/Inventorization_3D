@@ -14,7 +14,8 @@ namespace Inventory
         [SerializeField] private ItemHandler[] _itemHandlers;
         [SerializeField] private ScreenView _screenView;
         [SerializeField] private ItemPoolFiller _itemPoolFiller;
-        [SerializeField] private Transform _parentForItems;
+        [SerializeField] private Transform _poolOfItems;
+        [SerializeField] private Transform _poolOfSpawnedItems;
 
         private void Awake() => Initialize();
 
@@ -22,7 +23,7 @@ namespace Inventory
         {
             var gameStateProvider = await InitializeGameStateProvider();
             var inventoriesService = InitializeInventoryService(gameStateProvider);
-            var itemPool = InitializeItemsPool(_parentForItems); // далее заполнить пул
+            var itemPool = InitializeItemsPool(_poolOfItems, _poolOfSpawnedItems); // далее заполнить пул
             
             _itemPoolFiller.FillingPool(ref itemPool);
             
@@ -57,9 +58,9 @@ namespace Inventory
                 itemHandler.Initialize(_inventoryServiceProvider);
         }
 
-        private ItemPool<Item> InitializeItemsPool(Transform parentOfItems)
+        private ItemPool<Item> InitializeItemsPool(Transform poolOfItems, Transform poolOfSpawnedItems)
         {
-            return new ItemPool<Item>(parentOfItems);
+            return new ItemPool<Item>(poolOfItems, poolOfSpawnedItems);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Inventory.Items.Pool
 {
@@ -6,6 +7,7 @@ namespace Inventory.Items.Pool
     public struct SpawnItemStruct
     {
         public Item Item;
-        public int CountOfSpawn;
+        [Range(0, 1000)] public int CountToPool;
+        [Range(0, 1000)] public int CountOfSpawn;
     }
 }

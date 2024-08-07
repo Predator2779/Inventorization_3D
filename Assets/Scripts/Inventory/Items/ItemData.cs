@@ -6,6 +6,6 @@ namespace Inventory.Items
     public class ItemData : ScriptableObject
     {
         [field: SerializeField] public string Name { get; private set; } = "Unnamed";
-        [field: SerializeField] public int Count { get; set; } = 1;
+        [field: SerializeField] public int Amount { get; set; } = 1;
     }
 }
