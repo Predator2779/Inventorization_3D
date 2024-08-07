@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Inventory.Items
+namespace Inventory.Items.Pool
 {
     [Serializable]
     public class SpawnAreaOption

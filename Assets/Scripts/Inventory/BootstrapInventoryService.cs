@@ -2,6 +2,7 @@
 using Inventory.GameStates;
 using Inventory.Interaction;
 using Inventory.Items;
+using Inventory.Items.Pool;
 using Inventory.Screen;
 using UnityEngine;
 

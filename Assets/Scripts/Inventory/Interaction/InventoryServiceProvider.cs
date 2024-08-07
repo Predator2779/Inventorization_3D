@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using Inventory.GameStates;
 using Inventory.Grid;
 using Inventory.Items;
+using Inventory.Items.Pool;
 using Inventory.ResultStructs;
 using Inventory.Screen;
 using UnityEngine;

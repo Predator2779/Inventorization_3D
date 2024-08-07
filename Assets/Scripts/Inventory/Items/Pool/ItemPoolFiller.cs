@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Inventory.Items
+namespace Inventory.Items.Pool
 {
     public class ItemPoolFiller : MonoBehaviour
     {

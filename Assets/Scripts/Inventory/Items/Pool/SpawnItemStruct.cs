@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Inventory.Items
+namespace Inventory.Items.Pool
 {
     [Serializable]
     public struct SpawnItemStruct

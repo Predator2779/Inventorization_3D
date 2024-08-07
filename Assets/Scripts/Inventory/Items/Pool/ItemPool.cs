@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Inventory.Items
+namespace Inventory.Items.Pool
 {
     public class ItemPool<T> where T : Item
     {
