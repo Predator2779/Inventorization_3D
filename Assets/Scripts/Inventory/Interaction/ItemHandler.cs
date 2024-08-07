@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using Global;
 using Inventory.Grid;
 using Inventory.Items;
@@ -26,7 +27,7 @@ namespace Inventory.Interaction
             _inventoryInput = new InventoryInput();
             _inventoryInput.OnItemInteract += AddItemToInventory;
             _inventoryInput.OnInventoryChecked += CheckInventory;
-            
+
             var inventoryData = new InventoryGridData
             {
                 ownerId = _ownerId,
@@ -45,23 +46,27 @@ namespace Inventory.Interaction
         {
             var slotData = new List<InventorySlotData>();
             var length = size.x * size.y;
-            
+
             for (int i = 0; i < length; i++)
                 slotData.Add(new InventorySlotData());
 
             return slotData;
         }
-        
+
         private void AddItemToInventory()
         {
             if (_selectedItems.Count > 0)
             {
                 var item = _selectedItems[0];
+                _selectedItems.Remove(item);
                 var result = _inventoryServiceProvider.AddItemsToInventory(_ownerId, item);
                 if (result.ItemsToAddAmount == result.ItemsAddedAmount)
                 {
                     RemoveSelectedItem(item);
-                    _inventoryServiceProvider.AddItemToPool(item);
+                    
+                    var seq = DOTween.Sequence();
+                    seq.Append(item.transform.DOScale(Vector3.zero, 0.5f));
+                    seq.AppendCallback(() => { _inventoryServiceProvider.AddItemToPool(item); });
                 }
                 else
                 {

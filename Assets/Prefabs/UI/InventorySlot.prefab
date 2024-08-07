@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: {fileID: 1458897417509005768}
   _amount: {fileID: 1779286939273184066}
+  _background: {fileID: 4003273706191829892}
 --- !u!1 &6617204946066824094
 GameObject:
   m_ObjectHideFlags: 0

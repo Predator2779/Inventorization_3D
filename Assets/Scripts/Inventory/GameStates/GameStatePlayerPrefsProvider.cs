@@ -31,9 +31,7 @@ namespace Inventory.GameStates
                 }
 
                 Debug.Log("Saved successfully!");
-
-                // var json = JsonUtility.ToJson(GameState);
-                // PlayerPrefs.SetString(KEY, json);
+                
                 return true;
             });
         }
@@ -65,21 +63,6 @@ namespace Inventory.GameStates
 
                 return true;
             });
-
-            // if (PlayerPrefs.HasKey(KEY))
-            // {
-            //     await UniTask.WaitUntil(() =>
-            //     {
-            //         var json = PlayerPrefs.GetString(KEY);
-            //         GameState = JsonUtility.FromJson<GameStateData>(json);
-            //         return true;
-            //     });
-            // }
-            // else
-            // {
-            //     InitializeGameState();
-            //     await SaveGameState();
-            // }
         }
 
         public void AddInventory(InventoryGridData inventoryData)

@@ -9,7 +9,7 @@ namespace Inventory.Screen
         private readonly ScreenView _view;
 
         private InventoryGridController _currentInventoryController;
-        
+
         public ScreenController(InventoriesService inventoriesService, ScreenView view)
         {
             _inventoriesService = inventoriesService;
@@ -19,7 +19,7 @@ namespace Inventory.Screen
         public void OpenInventory(string ownerId)
         {
             CloseInventory();
-
+            
             _view.SetActivity(true);
             var inventory = _inventoriesService.GetInventory(ownerId);
             var inventoryView = _view.GetInventoryView();

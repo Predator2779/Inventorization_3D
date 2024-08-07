@@ -23,17 +23,17 @@ namespace Inventory.Items.Pool
 
             _items.Add(item);
             item.transform.SetParent(_itemsParent);
-            item.gameObject.SetActive(false);
+            item.SetActivity(false);
         }
 
         public Item Get(string itemId, Transform parent = null)
         {
-            foreach (var i in _items.Where(i => i.Data.Name == itemId))
+            foreach (var item in _items.Where(i => i.Data.Name == itemId))
             {
-                i.transform.SetParent(parent == null ? _parentOfSpawnedItems : parent);
-                i.gameObject.SetActive(true);
-                _items.Remove(i);
-                return i;
+                item.transform.SetParent(parent == null ? _parentOfSpawnedItems : parent);
+                item.SetActivity(true);
+                _items.Remove(item);
+                return item;
             }
 
             throw new Exception("Pool not contains this item");

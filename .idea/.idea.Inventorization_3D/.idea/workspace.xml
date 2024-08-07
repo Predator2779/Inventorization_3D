@@ -7,6 +7,9 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -14,6 +17,13 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/CharacterMovement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TestInstaller.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MoveInputClick.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory/Slot/InventorySlotView.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory/Screen/ScreenView.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory/Screen/ScreenController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory/GameStates/GameStatePlayerPrefsProvider.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory/Items/Item.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory/Items/Pool/ItemPool.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory/Interaction/ItemHandler.cs" />
       </list>
     </option>
   </component>
@@ -78,5 +88,13 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="341" y="170" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1722802297999" />
+    <state x="444" y="131" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1723063779894">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="444" y="131" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1723063779894" />
+    <state x="503" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1723063527093">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="503" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1723063527093" />
   </component>
 </project>

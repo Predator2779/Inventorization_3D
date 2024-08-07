@@ -3229,6 +3229,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 374247454}
     m_Modifications:
+    - target: {fileID: 1214318191600381746, guid: 18ea535ad1cac694aafa7e319767a067, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3373318772824289571, guid: 18ea535ad1cac694aafa7e319767a067, type: 3}
       propertyPath: m_Name
       value: InventorySlot
