@@ -9,7 +9,7 @@ namespace Inventory.Screen
         private readonly ScreenView _view;
 
         private InventoryGridController _currentInventoryController;
-
+        
         public ScreenController(InventoriesService inventoriesService, ScreenView view)
         {
             _inventoriesService = inventoriesService;

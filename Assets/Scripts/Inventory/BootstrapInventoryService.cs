@@ -16,14 +16,14 @@ namespace Inventory
         [SerializeField] private ItemPoolFiller _itemPoolFiller;
         [SerializeField] private Transform _poolOfItems;
         [SerializeField] private Transform _poolOfSpawnedItems;
-
+        
         private void Awake() => Initialize();
 
         private async void Initialize()
         {
             var gameStateProvider = await InitializeGameStateProvider();
             var inventoriesService = InitializeInventoryService(gameStateProvider);
-            var itemPool = InitializeItemsPool(_poolOfItems, _poolOfSpawnedItems); // далее заполнить пул
+            var itemPool = InitializeItemsPool(_poolOfItems, _poolOfSpawnedItems);
             
             _itemPoolFiller.FillingPool(ref itemPool);
             
