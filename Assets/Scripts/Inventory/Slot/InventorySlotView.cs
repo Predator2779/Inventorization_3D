@@ -1,5 +1,6 @@
 ﻿using System;
 using DG.Tweening;
+using Global;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,24 +25,22 @@ namespace Inventory.Slot
             set => _amount.text = value == 0 ? "" : value.ToString();
         }
 
-        // public void SetEnable(bool value)
-        // {
-        //     if (value) Enable();
-        //     else Disable();
-        // }
-
         private void OnEnable()
         {
-            _title.DOFade(1, 1);
-            _amount.DOFade(1, 1);
-            _background.DOFade(1, 1);
+            SetFade(0, 0);
+            SetFade(1, 0.3f);
         }
 
         private void OnDisable()
         {
-            _title.DOFade(0, 0);
-            _amount.DOFade(0, 0);
-            _background.DOFade(0, 0);
+            SetFade(0, 0);
+        }
+
+        private void SetFade(float fade, float duration)
+        {
+            _title.DOFade(fade, duration);
+            _amount.DOFade(fade, duration);
+            _background.DOFade(fade, duration);
         }
     }
 }
