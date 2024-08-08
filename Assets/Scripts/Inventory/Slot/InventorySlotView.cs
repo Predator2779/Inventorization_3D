@@ -3,16 +3,19 @@ using DG.Tweening;
 using Global;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Inventory.Slot
 {
-    public class InventorySlotView : MonoBehaviour, IInventorySlotView
+    public class InventorySlotView : MonoBehaviour, IInventorySlotView, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private TMP_Text _title;
         [SerializeField] private TMP_Text _amount;
         [SerializeField] private Image _background;
 
+        public event Action<Vector3> OnCursorEntered;
+        
         public string Title
         {
             get => _title.text;
@@ -34,6 +37,16 @@ namespace Inventory.Slot
         private void OnDisable()
         {
             SetFade(0, 0);
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.1f);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            transform.DOScale(Vector3.one, 0.1f);
         }
 
         private void SetFade(float fade, float duration)

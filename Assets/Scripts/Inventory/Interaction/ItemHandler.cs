@@ -88,12 +88,20 @@ namespace Inventory.Interaction
 
         private void AddSelectedItem(Item item)
         {
-            if (item != null && !_selectedItems.Contains(item)) _selectedItems.Add(item);
+            if (item != null && !_selectedItems.Contains(item))
+            {
+                _selectedItems.Add(item);
+                _inventoryServiceProvider.SelectItem(item.transform, true);
+            }
         }
 
         private void RemoveSelectedItem(Item item)
         {
-            if (item != null && _selectedItems.Contains(item)) _selectedItems.Remove(item);
+            if (item != null && _selectedItems.Contains(item))
+            {
+                _selectedItems.Remove(item);
+                _inventoryServiceProvider.SelectItem(item.transform, false);
+            }
         }
     }
 }

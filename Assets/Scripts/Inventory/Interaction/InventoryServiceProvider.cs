@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Inventory.GameStates;
 using Inventory.Grid;
 using Inventory.Items;
@@ -12,8 +14,8 @@ namespace Inventory.Interaction
 {
     public class InventoryServiceProvider : MonoBehaviour
     {
-        [SerializeField] private Transform _itemsParent; // Find or Create
-
+        [SerializeField] private Transform _pressButton;
+        
         private ScreenView _screenView;
         private InventoriesService _inventoriesService;
         private GameStatePlayerPrefsProvider _gameStateProvider;
@@ -85,6 +87,17 @@ namespace Inventory.Interaction
             }
         }
 
+        public void SelectItem(Transform item, bool isSelected)
+        {
+            _pressButton.SetActivity(isSelected);
+            
+            if (!isSelected) return;
+
+            var position = item.position;
+            position.y += item.localScale.y * 10;
+            _pressButton.transform.DOMove(position, 0.5f).SetEase(Ease.OutQuad);
+        }
+        
         public AddItemToInventoryGridResult AddItemsToInventory(string ownerId, Item item)
         {
             return _inventoriesService.AddItemsToInventory(ownerId, item.Data.Name, item.Data.Amount);
