@@ -13,8 +13,8 @@ namespace Inventory.Slot
         [SerializeField] private TMP_Text _title;
         [SerializeField] private TMP_Text _amount;
         [SerializeField] private Image _background;
-
-        public event Action<Vector3> OnCursorEntered;
+        
+        private float _baseFade;
         
         public string Title
         {
@@ -30,13 +30,9 @@ namespace Inventory.Slot
 
         private void OnEnable()
         {
+            _baseFade = _background.color.a;
             SetFade(0, 0);
-            SetFade(1, 0.3f);
-        }
-
-        private void OnDisable()
-        {
-            SetFade(0, 0);
+            SetFade(_baseFade, 0.3f);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
