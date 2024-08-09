@@ -19,7 +19,12 @@ namespace Inventory.Interaction
             Observable
                 .EveryUpdate()
                 .Where(_ => Input.GetKeyDown(KeyCode.Tab))
-                .Subscribe(_ => OnInventoryChecked?.Invoke());
+                .Subscribe(_ => OnInventoryChecked?.Invoke()); 
+            
+            Observable
+                .EveryUpdate()
+                .Where(_ => Input.GetKeyDown(KeyCode.Escape))
+                .Subscribe(_ => Application.Quit());
         }
     }
 }

@@ -26,6 +26,7 @@ namespace Inventory
             var itemPool = InitializeItemsPool(_poolOfItems, _poolOfSpawnedItems);
             
             _itemPoolFiller.FillingPool(ref itemPool);
+            new RespawnerItems(itemPool, 5);
             
             await InitializeInventoryServiceProvider(inventoriesService, gameStateProvider, itemPool);
             InitializeItemHandlers();

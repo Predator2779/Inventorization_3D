@@ -94,7 +94,7 @@ namespace Inventory.Interaction
             if (!isSelected) return;
 
             var position = item.position;
-            position.y += item.localScale.y * 10;
+            position.y += item.localScale.y * 5;
             _pressButton.transform.DOMove(position, 0.5f).SetEase(Ease.OutQuad);
         }
         

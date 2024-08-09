@@ -57,7 +57,6 @@ namespace Inventory.Interaction
             if (_selectedItems.Count > 0)
             {
                 var item = _selectedItems[0];
-                _selectedItems.Remove(item);
                 var result = _inventoryServiceProvider.AddItemsToInventory(_ownerId, item);
                 if (result.ItemsToAddAmount == result.ItemsAddedAmount)
                 {
@@ -69,6 +68,7 @@ namespace Inventory.Interaction
                 }
                 else
                 {
+                    _selectedItems.Remove(item);
                     item.Data.Amount = result.ItemsNotAddedAmount;
                     _selectedItems.Add(item);
                     print("Not all items have been added");
@@ -99,9 +99,11 @@ namespace Inventory.Interaction
         {
             if (item != null && _selectedItems.Contains(item))
             {
-                _selectedItems.Remove(item);
                 _inventoryServiceProvider.SelectItem(item.transform, false);
+                _selectedItems.Remove(item);
             }
+
+            if (_selectedItems.Count > 0) _inventoryServiceProvider.SelectItem(_selectedItems[0].transform, true);
         }
     }
 }
