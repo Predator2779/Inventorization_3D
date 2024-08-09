@@ -29,14 +29,32 @@ namespace Inventory.Items.Pool
         public Item Get(string itemId, Transform parent = null)
         {
             foreach (var item in _items.Where(i => i.Data.Name == itemId))
-            {
-                item.transform.SetParent(parent == null ? _parentOfSpawnedItems : parent);
-                item.SetActivity(true);
-                _items.Remove(item);
-                return item;
-            }
+                return SpawnItem(item);
 
             throw new Exception("Pool not contains this item");
+        }
+
+        public Item Get(Transform parent = null)
+        {
+            try
+            {
+                return SpawnItem(_items[0], parent);
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e);
+                throw;
+            }
+        }
+
+        public bool HasSpawnedItems() => _parentOfSpawnedItems.childCount > 0;
+
+        private Item SpawnItem(T item, Transform parent = null)
+        {
+            item.transform.SetParent(parent == null ? _parentOfSpawnedItems : parent);
+            item.SetActivity(true);
+            _items.Remove(item);
+            return item;
         }
     }
 }

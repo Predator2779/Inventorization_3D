@@ -29,7 +29,7 @@ namespace Inventory.Items.Pool
 
                 for (int i = 0; i < spawnedItem.CountOfSpawn; i++)
                 {
-                    pool.Get(spawnedItem.Item.name);
+                    pool.Get(spawnedItem.Item.Data.Name);
                 }
             }
         }
