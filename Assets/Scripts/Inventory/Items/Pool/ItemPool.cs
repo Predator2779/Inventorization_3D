@@ -51,9 +51,9 @@ namespace Inventory.Items.Pool
 
         private Item SpawnItem(T item, Transform parent = null)
         {
+            _items.Remove(item);
             item.transform.SetParent(parent == null ? _parentOfSpawnedItems : parent);
             item.SetActivity(true);
-            _items.Remove(item);
             return item;
         }
     }
